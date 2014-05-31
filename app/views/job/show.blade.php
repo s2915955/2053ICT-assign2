@@ -12,4 +12,7 @@ JobFind - {{{ $job->title }}}
 	<p>Application opening: {{{ $job->start_date }}}</p>
 	<p>Application deadline: {{{ $job->end_date }}}</p>
 	<p>{{ link_to_route('job.edit', 'Edit', array($job->id)) }}</p>
+	{{ Form::open(array('method' => 'DELETE', 'route' => array('job.destroy', $job->id))) }}
+	{{ Form::submit('Delete Job', array('class' => 'btn btn-danger')) }}
+	{{ Form::close() }}
 @stop

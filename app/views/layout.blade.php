@@ -32,13 +32,26 @@
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li class="index.html"><a href="#">Home</a></li>
-						<li><a href="#">List jobs</a></li>
+						<li>{{ link_to_route('job.index', "List Jobs") }}</li>
 						<li><a href="#">Search jobs</a></li>
 						<li><a href="#">List employers</a></li>
 						<li><a href="#">Advertise job</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Sign in</a></li>
+						@if (Auth::check())
+							{{ Auth::user()->email }} {{ link_to_route('user.logout', " (sign out)") }}
+						@else
+							{{ Form::open(array('route' => 'user.login')) }}
+							{{ Form::label('email', 'Email Address: ') }}
+							{{ Form::text('email') }}
+							{{ $errors->first('email') }}
+							{{ Form::label('password', 'Password: ') }}
+							{{ Form::password('password') }}
+							{{ $errors->first('password') }}
+							{{ Form::submit('Sign in') }}
+							{{ Form::close() }}
+						@endif
+            <!--<li><a href="#">Sign in</a></li>-->
 					</ul>
 				</div>
 			</div>

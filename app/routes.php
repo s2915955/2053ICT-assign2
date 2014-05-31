@@ -11,17 +11,8 @@
 |
 */
 
+Route::get('user/logout', array('as' => 'user.logout', 'uses' => 'UserController@logout'));
+Route::post('user/login', array('as' => 'user.login', 'uses' => 'UserController@login'));
 Route::resource('user', 'UserController');
 Route::resource('job', 'JobController');
 Route::resource('application', 'ApplicationController');
-/*Route::get('/', function()
-{
-//	$jobs = Job::all();
-//	$job = Job::find(1);
-	$jobs = Job::where('salary', '>=', 45000)->get();
-
-	foreach ($jobs as $job)
-		var_dump($job->title);
-//	print_r($job);
-	exit();
-});*/

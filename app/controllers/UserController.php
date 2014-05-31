@@ -9,7 +9,8 @@ class UserController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$users = Job::all();
+		return View::make('user.index', compact('users')); //alt: return View::make('users.index')->with('users', $users);
 	}
 
 
@@ -20,7 +21,7 @@ class UserController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('user.create');
 	}
 
 
@@ -31,7 +32,27 @@ class UserController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+		$v = Validator::make($input, User::$rules);
+		if ($v->passes())
+		{
+			$input = Input::all();
+			$encrypted = Hash::make($input['password']);
+			$user = new User();
+			$user->email = $input['email'];
+			$user->password = $encrypted;
+			$user->name = $input['name'];
+			$user->category = "employer";	//temporary
+			$user->phone = $input['phone'];
+			$user->photo = 1;	//temporary
+			$user->industry = $input['industry'];
+			$user->description = $input['description'];
+			$user->remember_token = "default";
+			$user->save();
+			return Redirect::action('JobController@index');
+    } else {
+			return Redirect::action('UserController@create')->withErrors($v);
+		}
 	}
 
 
@@ -55,7 +76,7 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		if ( Auth::check()) return Redirect::route('user.index');
 	}
 
 
@@ -67,7 +88,7 @@ class UserController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		if ( Auth::check()) return Redirect::route('user.index');
 	}
 
 
@@ -81,6 +102,30 @@ class UserController extends \BaseController {
 	{
 		//
 	}
+  
+	public function login()
+	{
+		$userdata = array(
+			'email' => Input::get('email'),
+			'password' => Input::get('password'),
+		);
+		if (Auth::attempt($userdata))
+		{
+			return Redirect::to(URL::previous());
+    } else {
+			return Redirect::to(URL::previous())->withInput();
+		}
+	}
 
+	public function logout()
+	{
+		Auth::logout();
+		return Redirect::action('JobController@index');
+	}
+
+	function authenticate($email, $password)
+	{
+		return Auth::attempt(array('email' => $email, 'password' => $password));
+	}
 
 }

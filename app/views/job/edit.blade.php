@@ -1,36 +1,30 @@
 @extends('layout')
 @section('title')
-JobFind - Advertise a Job
+JobFind - Edit {{{ $job->title }}}
 @stop
 @section('subheading')
-Advertise a Job
+Edit {{{ $job->title }}}
 @stop
 @section('content')
-	{{ Form::open(array('action' => 'JobController@store')) }}
+	{{ Form::model($job, array('method'=>'PATCH', 'route' => array('job.update', $job->id))) }}
 	{{ Form::label('title', 'Job Title: ') }}
 	{{ Form::text('title') }}
-	{{ $errors->first('title') }}
-	<p>
+	<br/>
 	{{ Form::label('description', 'Description: ') }}
 	{{ Form::textarea('description') }}
-	{{ $errors->first('description') }}
-	<p>
+	<br/>
 	{{ Form::label('location', 'Location: ') }}
 	{{ Form::text('location') }}
-	{{ $errors->first('location') }}
-	<p>
+	<br/>
 	{{ Form::label('salary', 'Salary per Anum: ') }}
 	{{ Form::text('salary') }}
-	{{ $errors->first('salary') }}
-	<p>
+	<br/>
 	{{ Form::label('start_date', 'Application opening: ') }}
 	{{ Form::text('start_date') }}
-	{{ $errors->first('start_date') }}
-	<p>
+	<br/>
 	{{ Form::label('end_date', 'Application deadline: ') }}
 	{{ Form::text('end_date') }}
-	{{ $errors->first('end_date') }}
-	<p>
-	{{ Form::submit('Submit Job') }}
+	<br/>
+	{{ Form::submit('Update') }}
 	{{ Form::close() }}
 @stop
