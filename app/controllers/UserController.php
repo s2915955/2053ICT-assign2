@@ -9,7 +9,7 @@ class UserController extends \BaseController {
 	 */
 	public function index()
 	{
-		$users = Job::all();
+		$users = User::all();
 		return View::make('user.index', compact('users')); //alt: return View::make('users.index')->with('users', $users);
 	}
 
@@ -42,14 +42,14 @@ class UserController extends \BaseController {
 			$user->email = $input['email'];
 			$user->password = $encrypted;
 			$user->name = $input['name'];
-			$user->category = "employer";	//temporary
+			$user->category = $input['category'];
 			$user->phone = $input['phone'];
 			$user->photo = 1;	//temporary
 			$user->industry = $input['industry'];
 			$user->description = $input['description'];
 			$user->remember_token = "default";
 			$user->save();
-			return Redirect::action('JobController@index');
+			return Redirect::route('user.show', $user->id);
     } else {
 			return Redirect::action('UserController@create')->withErrors($v);
 		}
@@ -64,7 +64,8 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$user = User::find($id);
+		return View::make('user.show', compact('user')); //alt: return View::make('user.show')->with('user', $user);
 	}
 
 
@@ -76,7 +77,9 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		if ( Auth::check()) return Redirect::route('user.index');
+		if (!Auth::check()) return Redirect::route('user.index');
+		$user = User::find($id);
+    return View::make('user.edit', compact('user')); //alt: return View::make('user.edit')->with('user', $user);
 	}
 
 
@@ -125,7 +128,6 @@ class UserController extends \BaseController {
 
 	function authenticate($email, $password)
 	{
-		return Auth::attempt(array('email' => $email, 'password' => $password));
+		return Auth::attempt(compact('email', 'password'));	//return Auth::attempt(array('email' => $email, 'password' => $password));
 	}
-
 }

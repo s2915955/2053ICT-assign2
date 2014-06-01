@@ -3,14 +3,20 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends Eloquent implements UserInterface, RemindableInterface
+{
+
+	function jobs()
+	{
+		return $this->hasMany('Job');
+  }
 
 	public static $rules = array(
 		'email' => 'required',
 		'password' => 'required',
 		'name' => 'required',
 		'phone' => 'required',
-		'description' => 'required'
+		'description' => 'required',
 	);
 
 	/**

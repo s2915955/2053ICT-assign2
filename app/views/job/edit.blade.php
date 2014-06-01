@@ -1,9 +1,9 @@
 @extends('layout')
 @section('title')
-JobFind - Edit {{{ $job->title }}}
+JobFind - Edit Job Advertisment - {{{ $job->title }}}
 @stop
 @section('subheading')
-Edit {{{ $job->title }}}
+Edit Job Advertisment - {{{ $job->title }}}
 @stop
 @section('content')
 	{{ Form::model($job, array('method'=>'PATCH', 'route' => array('job.update', $job->id))) }}

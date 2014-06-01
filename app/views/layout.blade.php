@@ -28,19 +28,12 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">JobFind</a>
+					<a class="navbar-brand" href="{{ route('home') }}">JobFind</a>
 				</div>
 				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li>{{ link_to_route('home', "Home") }}</li>
-						<li>{{ link_to_route('job.index', "List Jobs") }}</li>
-						<li><a href="#">Search jobs</a></li>
-						<li><a href="#">List employers</a></li>
-						<li><a href="#">Advertise job</a></li>
-					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						@if (Auth::check())
-							{{ Auth::user()->email }} {{ link_to_route('user.logout', " (sign out)") }}
+							Logged in as {{ Auth::user()->name }} {{ link_to_route('user.logout', " (sign out)") }}
 						@else
 							{{ Form::open(array('route' => 'user.login', 'class'=>'form')) }}
 							{{ Form::label('email', 'Email Address: ') }}
@@ -59,12 +52,27 @@
 		</div>
 		<div id ="main-body" class='container'>
 			<div class='row'>
-				<div class='col-sm-12'>
-          <h1>@yield('heading')</h1>
-          <h2>@yield('subheading')</h2>
+				<div class='col-sm-3'>
+					<div class='list-group'>
+						<a class='list-group-item' href="{{ route('home') }}">Home</a>
+						<a class='list-group-item' href="#">Search for Jobs</a>
+						<a class='list-group-item' href="{{ route('job.index') }}">List all Jobs</a>
+						<a class='list-group-item' href="{{ route('user.index') }}">List all Employers</a>
+						@if (Auth::check())
+							<a class='list-group-item' href="{{ route('job.create') }}">Advertise a Job</a>
+							<a class='list-group-item' href="#">Update Account Information</a>
+						@endif
+					</div>
+				</div>
+				<div class='col-sm-9'>
+        	<h1>@yield('page_title')</h1>
+        	<h2>@yield('subheading')</h2>
 					@yield('content')
 				</div>
 			</div>
 		</div>
 	</body>
+	<footer>
+		Developed by Eddie Benavides (s2915955) - {{ link_to_route('home', " About this application") }}
+	<footer>
 </html>

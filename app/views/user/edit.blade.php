@@ -1,29 +1,32 @@
 @extends('layout')
 @section('title')
-JobFind - Edit {{{ $user->name }}}
+JobFind - Update Account Information - {{{ $user->name }}}
 @stop
 @section('subheading')
-Edit {{{ $user->name }}}
+Update Account Information - {{{ $user->name }}}
 @stop
 @section('content')
 	{{ Form::model($user, array('method'=>'PATCH', 'route' => array('user.update', $user->id))) }}
-	{{ Form::label('name', 'Full Name: ') }}
+	{{ Form::label('name', 'Name: ') }}
 	{{ Form::text('name') }}
 	<br/>
-	{{ Form::label('description', 'Description: ') }}
-	{{ Form::textarea('description') }}
+	{{ Form::label('password', 'Password: ') }}
+	{{ Form::text('password') }}
 	<br/>
-	{{ Form::label('location', 'Location: ') }}
-	{{ Form::text('location') }}
+	{{ Form::label('email', 'Email Address: ') }}
+	{{ Form::text('email') }}
 	<br/>
-	{{ Form::label('salary', 'Salary per Anum: ') }}
-	{{ Form::text('salary') }}
+	{{ Form::label('number', 'Phone Number: ') }}
+	{{ Form::text('number') }}
 	<br/>
-	{{ Form::label('start_date', 'Application opening: ') }}
-	{{ Form::text('start_date') }}
+	{{ Form::label('photo', ' Photo: ') }}
+	{{ Form::text('nphotoame') }}
 	<br/>
-	{{ Form::label('end_date', 'Application deadline: ') }}
-	{{ Form::text('end_date') }}
+	{{ Form::label('industry', ' Industry: ') }}
+	{{ Form::text('industry') }}
+	<br/>
+	{{ Form::label('description', ' Description: ') }}
+	{{ Form::text('description') }}
 	<br/>
 	{{ Form::submit('Update') }}
 	{{ Form::close() }}

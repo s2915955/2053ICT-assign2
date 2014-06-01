@@ -7,6 +7,9 @@ Create an Account
 @stop
 @section('content')
 	{{ Form::open(array('action' => 'UserController@store')) }}
+	{{ Form::label('category', 'Account Type: ') }}
+	{{ Form::select('category', array('J' => 'Job Seeker', 'E' => 'Employer')) }}
+	<p>
 	{{ Form::label('email', 'Email Address: ') }}
 	{{ Form::email('email') }}
 	{{ $errors->first('email') }}
@@ -24,7 +27,7 @@ Create an Account
 	{{ $errors->first('phone') }}
 	<p>
 	{{ Form::label('industry', 'Industry: ') }}
-	{{ Form::text('industry') }}
+	{{ Form::text('industry', 'For Employers only') }}
 	{{ $errors->first('industry') }}
 	<p>
 	{{ Form::label('description', 'Description: ') }}
