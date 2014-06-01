@@ -6,10 +6,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>@yield('title')</title>
     
-		<!-- CSS stylesheet -->
-		<link media="all" type="text/css" rel="stylesheet" href="css/bootstrap.css">
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<!-- CSS stylesheet -->
+		<link media="all" type="text/css" rel="stylesheet" href="styles/bootstrap.css">
+		{{ HTML::style('styles/bootstrap.css') }}
 		<!-- JQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<!-- Plugins -->
@@ -31,7 +32,7 @@
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="index.html"><a href="#">Home</a></li>
+						<li>{{ link_to_route('home', "Home") }}</li>
 						<li>{{ link_to_route('job.index', "List Jobs") }}</li>
 						<li><a href="#">Search jobs</a></li>
 						<li><a href="#">List employers</a></li>
@@ -41,7 +42,7 @@
 						@if (Auth::check())
 							{{ Auth::user()->email }} {{ link_to_route('user.logout', " (sign out)") }}
 						@else
-							{{ Form::open(array('route' => 'user.login')) }}
+							{{ Form::open(array('route' => 'user.login', 'class'=>'form')) }}
 							{{ Form::label('email', 'Email Address: ') }}
 							{{ Form::text('email') }}
 							{{ $errors->first('email') }}

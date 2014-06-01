@@ -16,3 +16,5 @@ Route::post('user/login', array('as' => 'user.login', 'uses' => 'UserController@
 Route::resource('user', 'UserController');
 Route::resource('job', 'JobController');
 Route::resource('application', 'ApplicationController');
+
+Route::get('/', array('as' => 'home', 'uses' => 'JobController@index'));

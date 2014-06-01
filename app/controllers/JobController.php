@@ -89,17 +89,24 @@ class JobController extends \BaseController {
 	 */
 	public function update($id)
 	{
+
 		if (!Auth::check()) return Redirect::route('job.index');
 		$job = Job::find($id);
-    $input = Input::all();
-		$job->title = $input['title'];
-		$job->description = $input['description'];
-		$job->location = $input['location'];
-		$job->salary = $input['salary'];
-		$job->start_date = $input['start_date'];
-		$job->end_date = $input['end_date'];
-		$job->save();
-		return Redirect::route('job.show', $job->id);
+		$input = Input::all();
+		$v = Validator::make($input, Job::$rules);
+		if ($v->passes())
+		{
+			$job->title = $input['title'];
+			$job->description = $input['description'];
+			$job->location = $input['location'];
+			$job->salary = $input['salary'];
+			$job->start_date = $input['start_date'];
+			$job->end_date = $input['end_date'];
+			$job->save();
+			return Redirect::route('job.show', $job->id);
+    } else {
+			return Redirect::action('JobController@edit')->withErrors($v);
+		}
 	}
 
 
