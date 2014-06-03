@@ -10,7 +10,7 @@ class UserController extends \BaseController {
 	public function index()
 	{
 		$id = Auth::user()->id;
-		$jobs = DB::table('jobs')->where('user_id', '=', $id)->get();
+		$jobs = DB::table('jobs')->where('user_id', '=', $id)->orderBy('created_at', 'DESC')->get();
 		return View::make('user.index', compact('jobs')); //alt: return View::make('users.index')->with('users', $users);
 	}
 

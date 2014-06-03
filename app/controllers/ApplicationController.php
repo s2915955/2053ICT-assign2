@@ -29,22 +29,21 @@ class ApplicationController extends \BaseController {
 	public function store()
 	{
 		if (!Auth::check()) return Redirect::route('job.index');
+		$id = Auth::user()->id;
+		$date = new dateTime('now');
 		$input = Input::all();
-		$v = Validator::make($input, Job::$rules);
+		$v = Validator::make($input, Application::$rules);
 		if ($v->passes())
 		{
-			$job = new Job();
-			$job->title = $input['title'];
-			$job->description = $input['description'];
-			$job->location = $input['location'];
-			$job->salary = $input['salary'];
-			$job->start_date = $input['start_date'];
-			$job->end_date = $input['end_date'];
-			$job->user_id = 1;	//temporary
-			$job->save();
-			return Redirect::route('job.show', $job->id);
+			$application = new Application();
+			$application->user_id = $id;
+			$application->job_id = '1';	//Could not fix
+			$application->letter = $input['letter'];
+			$application->application_date = $date;
+			$application->save();
+			return Redirect::route('job.index');
     } else {
-			return Redirect::action('JobController@create')->withErrors($v);
+			return Redirect::action('ApplicationController@create')->withErrors($v);
 		}
   }
 

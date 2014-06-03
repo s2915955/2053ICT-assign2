@@ -9,7 +9,7 @@ class JobController extends \BaseController {
 	 */
 	public function index()
 	{
-		$jobs = DB::table('jobs')->orderBy('created_at', 'DESC')->paginate(10);
+		$jobs = DB::table('jobs')->orderBy('created_at', 'DESC')->paginate(5);
 		return View::make('job.index', compact('jobs')); //alt: return View::make('jobs.index')->with('jobs', $jobs);
 	}
 
@@ -60,7 +60,7 @@ class JobController extends \BaseController {
 	public function show($id)
 	{
 		$job = Job::find($id);
-		return View::make('job.show', compact('job')); //alt: return View::make('job.show')->with('job', $job);
+		return View::make('job.show', compact('job', 'user')); //alt: return View::make('job.show')->with('job', $job);
 	}
 
 
