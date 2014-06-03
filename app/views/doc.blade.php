@@ -54,9 +54,14 @@ JobFind - About this Application
 	<b>Employer home page link:</b>		 public/user
 	<h2>Application Issues</h2>
 	<ul>
-    <li>Job search is broken.</li>
-    <li>Any date related functionality is not working (ie. showing time left to apply or hiding expired jobs).</li>
-    <li>Could not get image support to function. Newly created users have a default value passed to the photo field.</li>
-    <li>Could not pass the $job->id to the job application form. As a result, the job application functionality is not working.</li>
+		<li>Job search is broken.</li>
+		<li>Any date related functionality is not working (ie. showing time left to apply or hiding expired jobs).</li>
+		<li>Could not get image support to function. Newly created users have a default value passed to the photo field.</li>
+		<li>Could not pass the $job->id to the job application form. As a result, the job application functionality is not working.</li>
 	</ul>
+	<h2>Usernames and passwords</h2>
+	<p><b>Email Address: </b>HR@startech.com<br>            				<b>Password: </b>12345</p>
+	<p><b>Email Address: </b>HR@DnH.com<br>                 				<b>Password: </b>54321</p>
+	<p><b>Email Address: </b>HR@streamcommunications.com<br>				<b>Password: </b>00000</p>
+	<p><b>Email Address: </b>HR@google.com<br>              				<b>Password: </b>11111</p>
 @stop
