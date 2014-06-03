@@ -4,41 +4,59 @@ class ApplicationController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		//
+		$jobs = DB::table('jobs')->orderBy('created_at', 'DESC')->paginate(10);
+		return View::make('index', compact('jobs')); //alt: return View::make('jobs.index')->with('jobs', $jobs);
 	}
 
+	public function doc()
+	{
+		return View::make('doc');
+	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		//
+		if (!Auth::check()) return Redirect::route('job.index');
+		return View::make('application.create');
 	}
 
 
 	/**
 	 * Store a newly created resource in storage.
-	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-		//
-	}
+		if (!Auth::check()) return Redirect::route('job.index');
+		$input = Input::all();
+		$v = Validator::make($input, Job::$rules);
+		if ($v->passes())
+		{
+			$job = new Job();
+			$job->title = $input['title'];
+			$job->description = $input['description'];
+			$job->location = $input['location'];
+			$job->salary = $input['salary'];
+			$job->start_date = $input['start_date'];
+			$job->end_date = $input['end_date'];
+			$job->user_id = 1;	//temporary
+			$job->save();
+			return Redirect::route('job.show', $job->id);
+    } else {
+			return Redirect::action('JobController@create')->withErrors($v);
+		}
+  }
 
 
 	/**
 	 * Display the specified resource.
-	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
@@ -49,8 +67,6 @@ class ApplicationController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
@@ -81,6 +97,4 @@ class ApplicationController extends \BaseController {
 	{
 		//
 	}
-
-
 }

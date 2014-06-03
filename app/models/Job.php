@@ -1,4 +1,5 @@
 <?php
+
 class Job extends Eloquent
 {
 	public static $rules = array(

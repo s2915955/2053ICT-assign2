@@ -1,33 +1,27 @@
 @extends('layout')
 @section('title')
-JobFind - Update Account Information - {{{ $user->name }}}
+JobFind - Update Account Information
 @stop
 @section('subheading')
-Update Account Information - {{{ $user->name }}}
+Update Account Information
 @stop
 @section('content')
 	{{ Form::model($user, array('method'=>'PATCH', 'route' => array('user.update', $user->id))) }}
-	{{ Form::label('name', 'Name: ') }}
-	{{ Form::text('name') }}
-	<br/>
-	{{ Form::label('password', 'Password: ') }}
-	{{ Form::text('password') }}
-	<br/>
 	{{ Form::label('email', 'Email Address: ') }}
 	{{ Form::text('email') }}
-	<br/>
-	{{ Form::label('number', 'Phone Number: ') }}
-	{{ Form::text('number') }}
-	<br/>
+	<p>
+	{{ Form::label('phone', 'Phone Number: ') }}
+	{{ Form::text('phone') }}
+	<p>
 	{{ Form::label('photo', ' Photo: ') }}
-	{{ Form::text('nphotoame') }}
-	<br/>
+	{{ Form::text('photo') }}
+	<p>
 	{{ Form::label('industry', ' Industry: ') }}
 	{{ Form::text('industry') }}
-	<br/>
+	<p>
 	{{ Form::label('description', ' Description: ') }}
-	{{ Form::text('description') }}
-	<br/>
+	{{ Form::textarea('description') }}
+	<br>
 	{{ Form::submit('Update') }}
 	{{ Form::close() }}
 @stop

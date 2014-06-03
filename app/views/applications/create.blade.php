@@ -1,12 +1,12 @@
 @extends('layout')
 @section('title')
-JobFind - Advertise a Job
+JobFind - Apply for Job
 @stop
 @section('subheading')
-Advertise a Job
+Apply for Job
 @stop
 @section('content')
-	{{ Form::open(array('action' => 'JobController@store')) }}
+	{{ Form::open(array('action' => 'ApplicationController@store')) }}
 	{{ Form::label('title', 'Job Title: ') }}
 	{{ Form::text('title') }}
 	<p>

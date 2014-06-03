@@ -1,17 +1,17 @@
 @extends('layout')
 @section('title')
-JobFind - View Account Information
+JobFind - Manage Account
 @stop
 @section('subheading')
-Update Account Information
+Manage Account
 @stop
 @section('content')
-	<p>Name: {{{ $user->name }}}</p>
-	<p>Email Address: {{{ $user->email }}}</p>
-	<p>Phone Number: {{{ $user->phone }}}</p>
-	<p>Photo: {{{ $user->photo }}}</p>
-	<p>Industry: {{{ $user->industry }}}</p>
-	<p>Description: {{{ $user->description }}}</p>
-	<p>{{ link_to_route('user.edit', 'Edit Account', array($user->id)) }}</p>
+	<p><div id="label">Name: </div>{{{ $user->name }}}
+	<p><div id="label">Email Address: </div>{{{ $user->email }}}
+	<p><div id="label">Phone Number: </div>{{{ $user->phone }}}
+	<p><div id="label">Photo: </div>{{{ $user->photo }}}
+	<p><div id="label">Industry: </div>{{{ $user->industry }}}
+	<p><div id="label">Description: </div>{{{ $user->description }}}
+	<p>{{ link_to_route('user.edit', 'Edit Account', array($user->id)) }}
 	{{ Form::close() }}
 @stop

@@ -2,33 +2,31 @@
 
 class JobController extends \BaseController {
 
+
 	/**
 	 * Display a listing of the resource.
-	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$jobs = Job::all();
+		$jobs = DB::table('jobs')->orderBy('created_at', 'DESC')->paginate(10);
 		return View::make('job.index', compact('jobs')); //alt: return View::make('jobs.index')->with('jobs', $jobs);
 	}
 
 
 	/**
 	 * Show the form for creating a new resource.
-	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		if (!Auth::check()) return Redirect::route('job.index');
+		if (!Auth::check())return Redirect::route('job.index');
 		return View::make('job.create');
 	}
 
 
 	/**
 	 * Store a newly created resource in storage.
-	 *
 	 * @return Response
 	 */
 	public function store()
@@ -45,7 +43,7 @@ class JobController extends \BaseController {
 			$job->salary = $input['salary'];
 			$job->start_date = $input['start_date'];
 			$job->end_date = $input['end_date'];
-			$job->user_id = 1;	//temporary
+			$job->user_id = $id;
 			$job->save();
 			return Redirect::route('job.show', $job->id);
     } else {
@@ -56,8 +54,6 @@ class JobController extends \BaseController {
 
 	/**
 	 * Display the specified resource.
-	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
@@ -69,8 +65,6 @@ class JobController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
@@ -83,8 +77,6 @@ class JobController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update($id)
@@ -112,8 +104,6 @@ class JobController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
@@ -125,4 +115,22 @@ class JobController extends \BaseController {
 	}
 
 
+	/**
+	 * Display the specified resource.
+	 * @return Response
+	 */
+	public function search()
+	{
+		$input= Input::all();
+		$search_terms = explode(' ', implode($input));
+		$jobs = DB::table('jobs');
+		foreach($search_terms as $search)
+		{
+			$jobs->where('title', 'LIKE', '%' . $search . '%');
+		}
+		$results = $jobs->get();
+//		$results = DB::table('jobs')->join('users', 'user_id', '=', 'users.id')->select('title', 'jobs.description', 'location')->get($input);
+//    if(isset($results-$jobs))
+    return View::make('job.search', compact('jobs'));
+	}
 }

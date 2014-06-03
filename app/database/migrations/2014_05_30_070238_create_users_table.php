@@ -7,7 +7,6 @@ class CreateUsersTable extends Migration {
 
 	/**
 	 * Run the migrations.
-	 *
 	 * @return void
 	 */
 	public function up()
@@ -19,7 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->string('password')->index();
 			$table->string('remember_token');
 			$table->string('name');
-			$table->string('category');
+			$table->integer('category');
 			$table->string('phone');
 			$table->binary('photo');
 			$table->string('industry');
@@ -30,12 +29,10 @@ class CreateUsersTable extends Migration {
 
 	/**
 	 * Reverse the migrations.
-	 *
 	 * @return void
 	 */
 	public function down()
 	{
 		Schema::dropIfExists('users');
 	}
-
 }
