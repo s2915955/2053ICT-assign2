@@ -26,7 +26,7 @@ Create an Account
 	{{ Form::file('photo') }}
 	<p>
 	{{ Form::label('industry', 'Industry: ') }}
-	{{ Form::text('industry', 'For Employers only') }}
+	{{ Form::text('industry') }}
 	<p>
 	{{ Form::label('description', 'Description: ') }}
 	{{ Form::textarea('description') }}

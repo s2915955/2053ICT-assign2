@@ -15,9 +15,14 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function index()
 	{
-		return View::make('hello');
+		$jobs = DB::table('jobs')->orderBy('created_at', 'DESC')->paginate(10);
+		return View::make('index', compact('jobs')); //alt: return View::make('index')->with('jobs', $jobs);
 	}
 
+	public function doc()
+	{
+		return View::make('doc');
+	}
 }

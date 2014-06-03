@@ -53,7 +53,6 @@
 						@if (Auth::check())
 						<a class='list-group-item' href="{{ route('user.index') }}">List my Jobs</a>
 							<a class='list-group-item' href="{{ route('job.create') }}">Advertise a Job</a>
-							<a class='list-group-item' href="{{ route('user.edit') }}">Manage Account</a>
 							@else
 								<a class='list-group-item' href="{{ route('user.create') }}">Create an Account</a>
 						@endif

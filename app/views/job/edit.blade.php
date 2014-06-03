@@ -9,22 +9,23 @@ Edit Job Advertisment
 	{{ Form::model($job, array('method'=>'PATCH', 'route' => array('job.update', $job->id))) }}
 	{{ Form::label('title', 'Job Title: ') }}
 	{{ Form::text('title') }}
-	<br/>
+	<br><br>
 	{{ Form::label('description', 'Description: ') }}
 	{{ Form::textarea('description') }}
-	<br/>
+	<br>
 	{{ Form::label('location', 'Location: ') }}
 	{{ Form::text('location') }}
-	<br/>
+	<br>
 	{{ Form::label('salary', 'Salary per Anum: ') }}
 	{{ Form::text('salary') }}
-	<br/>
+	<br>
 	{{ Form::label('start_date', 'Application opening: ') }}
 	{{ Form::text('start_date') }}
-	<br/>
+	<br>
 	{{ Form::label('end_date', 'Application deadline: ') }}
 	{{ Form::text('end_date') }}
-	<br/>
+	<br><br>
 	{{ Form::submit('Update') }}
 	{{ Form::close() }}
+
 @stop

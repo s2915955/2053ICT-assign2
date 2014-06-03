@@ -17,6 +17,6 @@ Route::resource('user', 'UserController');
 Route::resource('job', 'JobController');
 Route::resource('application', 'ApplicationController');
 
-Route::get('/', array('as' => 'home', 'uses' => 'ApplicationController@index'));
+Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
 Route::any('search', array('uses' => 'JobController@search'));
-Route::get('doc', array('as' => 'doc', 'uses' => 'ApplicationController@doc'));
+Route::get('doc', array('as' => 'doc', 'uses' => 'HomeController@doc'));

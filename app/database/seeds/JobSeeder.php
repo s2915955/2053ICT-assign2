@@ -20,7 +20,6 @@ class JobSeeder extends Seeder {
 		$job->end_date = '2014-06-27';
 		$job->user_id = 1;
 		$job->save();
-
 		$job = new Job;
 		$job->title = 'Technical Solution Manager';
 		$job->description = 'Reporting to the Technical Practice Manager, the Technical Solutions Manager is responsible for creating client technical design documentation, managing technical delivery and developing related client relationships. The Technical Solutions Manager will provide leadership related to technologies, best practices as well as provide consultancy expertise to clients and project teams. As a member of the CreditPath team, the Manager plays a key role in planning and execution to achieve operational excellence, client satisfaction, and financial goals.';

@@ -32,6 +32,7 @@ class JobController extends \BaseController {
 	public function store()
 	{
 		if (!Auth::check()) return Redirect::route('job.index');
+		$id = Auth::user()->id;
 		$input = Input::all();
 		$v = Validator::make($input, Job::$rules);
 		if ($v->passes())
